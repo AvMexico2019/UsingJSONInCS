@@ -15,6 +15,7 @@ namespace UsingJSONInCS
         // Es necesario instalar en el package manager console 
         // Install-Package Newtonsoft.Json
         // ref: https://www.c-sharpcorner.com/article/working-with-json-string-in-C-Sharp/
+        // ref: https://www.c-sharpcorner.com/article/json-serialization-and-deserialization-in-c-sharp/
         static void Main(string[] args)
         {
             string jsonData = @"{'FirstName': 'Jignesh', 'LastName': 'Trivedi'}";
