@@ -11,12 +11,6 @@ namespace UsingJSONInCS
         [DataMember(Name = "LastName", Order = 0)]
         public string LastName { get; set; }
 
-        public MyDetail(string FirstName, string LastName)
-        {
-            this.FirstName = FirstName;
-            this.LastName = LastName;
-        }
-
         public string ToString()
         {
             return "Name: " + FirstName + ", Description: " + LastName;
