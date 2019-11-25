@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization.Json;
 using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -16,56 +13,36 @@ namespace UsingJSONInCS
         // Install-Package Newtonsoft.Json
         // ref: https://www.c-sharpcorner.com/article/working-with-json-string-in-C-Sharp/
         // ref: https://www.c-sharpcorner.com/article/json-serialization-and-deserialization-in-c-sharp/
+        // ref: https://bytefish.de/blog/enum_datacontractjsonserializer/
         static void Main(string[] args)
         {
             string jsonData = @"{'FirstName': 'Jignesh', 'LastName': 'Trivedi'}";
 
-            Console.WriteLine("Ejemplo JsonConverter");
+            Console.WriteLine("Ejemplo E1: JsonConverter string a objeto");
+            Console.WriteLine(jsonData);
             MyDetail myDetails = JsonConvert.DeserializeObject<MyDetail>(jsonData);
-            Console.WriteLine(string.Concat("Hi ", myDetails.FirstName, " " + myDetails.LastName));
+            Console.WriteLine(string.Concat("Objeto: " + myDetails.ToString()));
             
-            Console.WriteLine("Ejemplo JsonConverter");
+            Console.WriteLine("Ejemplo E2: JObject Parse objetos dinámicos string a objeto");
             dynamic data = JObject.Parse(jsonData);
             Console.WriteLine(string.Concat("Hi ", data.FirstName, " " + data.LastName));
             
-            Console.WriteLine("Ejemplo JsonParse");
+            Console.WriteLine("Ejemplo E3 JObject Parse");
             var details = JObject.Parse(jsonData);
             Console.WriteLine(string.Concat("Hi ", details["FirstName"], " " + details["LastName"]));
 
-            Console.WriteLine("Ejemplo usando objetos dynamicos");
-            dynamic data1 = JObject.Parse(jsonData);
-            Console.WriteLine(string.Concat("Hi ", data1.FirstName, " " + data1.LastName));
+            // Convert BlogSites object to JOSN string format 
+            Console.WriteLine("Ejemplo E6 JsonConvert \nobjeto a string ");
+            BlogSite bsObjE6 = new BlogSite("Ejemplo E6", "contenido E6");
+            string jsonDataE6 = JsonConvert.SerializeObject(bsObjE6);
+            Console.WriteLine(jsonDataE6);
 
-            Console.WriteLine("Ejemplo usando serialización");
-            DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(typeof(MyDetail));
-            MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(jsonData));
-            stream.Position = 0;
-            MyDetail dataContractDetail = (MyDetail)jsonSerializer.ReadObject(stream);
-            Console.WriteLine(string.Concat("Hi ", dataContractDetail.FirstName, " " + dataContractDetail.LastName));
-
-
-            Console.WriteLine("Ejemplo usando de serialización");
-            DataContractJsonSerializer jsonSerializer1 = new DataContractJsonSerializer(typeof(MyDetail));
-            MemoryStream stream1 = new MemoryStream(Encoding.UTF8.GetBytes(jsonData));
-            stream.Position = 0;
-            MyDetail dataContractDetail = (MyDetail)jsonSerializer.ReadObject(stream);
-            Console.WriteLine(string.Concat("Hi ", dataContractDetail.FirstName, " " + dataContractDetail.LastName));
+            Console.WriteLine("Ejemplo E7 JsonConvert\nstring to Objeto ");
+            string jsonE7 = @"{'Name': 'C-sharpcorner', 'Description': 'Share Knowledge'}";
+            BlogSite bsObjE7 = JsonConvert.DeserializeObject<BlogSite>(jsonE7);
+            Console.WriteLine(bsObjE7.ToString());
 
             Console.ReadKey();
-        }
-    }
-
-    public class MyDetail
-    {
-        public string FirstName
-        {
-            get;
-            set;
-        }
-        public string LastName
-        {
-            get;
-            set;
         }
     }
 }

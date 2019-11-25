@@ -46,6 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BlogSite.cs" />
+    <Compile Include="Iserializer.cs" />
+    <Compile Include="JsonSerializer.cs" />
+    <Compile Include="MyDetail.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
