@@ -34,15 +34,27 @@ namespace UsingJSONInCS
             Console.WriteLine("------------------------------------");
 
             Console.WriteLine(">>>> Claves");
+            DateTime viejo = new DateTime(2010, 1, 4);
+            DateTime ultimo = new DateTime(2019, 11, 25);
+            string v1;
+            Console.WriteLine(">>----");
+            Console.WriteLine(v1 = viejo.ToString("yyyy-MM-dd"));
+            Console.WriteLine(Convert.ToDateTime(v1));
+            Console.WriteLine(">>----");
+            Console.WriteLine(v1 = ultimo.ToString("yyyy-MM-dd"));
+            Console.WriteLine(Convert.ToDateTime(v1));
+            Console.WriteLine(">>----");
+            Console.WriteLine(DateTime.Today.ToString("yyyy-MM-dd"));
             ClaveSelloDigital[] ArregloClaves = new ClaveSelloDigital[]
                 {
-                    new ClaveSelloDigital{FechaAlta = "2018-01-04", Clave ="primera clave"},
-                    new ClaveSelloDigital{FechaAlta = "2019-11-25", Clave ="segunda clave"}
+                    new ClaveSelloDigital{FechaAlta = viejo.ToString("yyyy-MM-dd"), Clave ="Ejemplo para ver como introducir otra clave"},
+                    new ClaveSelloDigital{FechaAlta = ultimo.ToString("yyyy-MM-dd"), Clave ="Esta cadena debe ser secreta y administrada por operación del sistema, para evitar que los programadores puedan modificar la base de sellos historica de producción"}
                 };
             Console.WriteLine(ArregloClaves[0].ToCadena());
             Console.WriteLine(ArregloClaves[1].ToCadena());
             string claves = JsonConvert.SerializeObject(ArregloClaves);
             Console.WriteLine("Claves serializado >" + claves + "<");
+            
             ClaveSelloDigital[] clavesWebConfig = JsonConvert.DeserializeObject<ClaveSelloDigital[]>(claves);
             Console.WriteLine(clavesWebConfig[0].ToCadena());
             Console.WriteLine(clavesWebConfig[1].ToCadena());
