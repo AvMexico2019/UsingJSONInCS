@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BlogSite.cs" />
+    <Compile Include="ClavesSelloDigital.cs" />
     <Compile Include="Iserializer.cs" />
     <Compile Include="JsonSerializer.cs" />
     <Compile Include="MyDetail.cs" />

@@ -33,6 +33,22 @@ namespace UsingJSONInCS
             Console.WriteLine(bsObjE2.ToString());
             Console.WriteLine("------------------------------------");
 
+            Console.WriteLine(">>>> Claves");
+            ClaveSelloDigital[] ArregloClaves = new ClaveSelloDigital[]
+                {
+                    new ClaveSelloDigital{FechaAlta = "2018-01-04", Clave ="primera clave"},
+                    new ClaveSelloDigital{FechaAlta = "2019-11-25", Clave ="segunda clave"}
+                };
+            Console.WriteLine(ArregloClaves[0].ToCadena());
+            Console.WriteLine(ArregloClaves[1].ToCadena());
+            string claves = JsonConvert.SerializeObject(ArregloClaves);
+            Console.WriteLine("Claves serializado >" + claves + "<");
+            ClaveSelloDigital[] clavesWebConfig = JsonConvert.DeserializeObject<ClaveSelloDigital[]>(claves);
+            Console.WriteLine(clavesWebConfig[0].ToCadena());
+            Console.WriteLine(clavesWebConfig[1].ToCadena());
+
+            Console.WriteLine("------------------------------------");
+
             Console.WriteLine("Ejemplo E3 DataContractJsonSerializer objeto a  string");
             ISerializer jsonSerializer;
             jsonSerializer = new JsonSerializer();
