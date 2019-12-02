@@ -9,6 +9,7 @@ namespace UsingJSONInCS
 {
     class Program
     {
+        
         // Es necesario instalar en el package manager console 
         // Install-Package Newtonsoft.Json
         // ref: https://www.c-sharpcorner.com/article/working-with-json-string-in-C-Sharp/
@@ -16,6 +17,45 @@ namespace UsingJSONInCS
         // ref: https://bytefish.de/blog/enum_datacontractjsonserializer/
         static void Main(string[] args)
         {
+            Console.WriteLine(">>>> REGEX");
+            Regex rx = new Regex { RegexDef = @"\d+" };
+            Regex ry = new Regex { RegexDef = @"\w+" };
+            string r1;
+            Console.WriteLine(">>----");
+            Console.WriteLine(r1 = rx.ToCadena());
+            Console.WriteLine(">" + r1 + "<");
+            Console.WriteLine(">>----");
+            Console.WriteLine(r1 = ry.ToCadena());
+            Console.WriteLine(r1);
+            Console.WriteLine(">>----");
+            Regex[] DefiniciosnesRegex = new Regex[]
+                {
+                    rx,
+                    ry
+                };
+            Console.WriteLine(DefiniciosnesRegex[0].ToCadena());
+            Console.WriteLine(DefiniciosnesRegex[1].ToCadena());
+            string ArregloRegex = JsonConvert.SerializeObject(DefiniciosnesRegex);
+            Console.WriteLine("Regex serializado >" + ArregloRegex + "<");
+
+            Regex[] RegexSettings = JsonConvert.DeserializeObject<Regex[]>(ArregloRegex);
+            Console.WriteLine(RegexSettings[0].ToCadena());
+            Console.WriteLine(RegexSettings[1].ToCadena());
+
+            Console.WriteLine("------------------------------------");
+            Console.ReadKey();
+
+            Console.WriteLine("Ejemplo de Clave de Sello Digital");
+            string FechaDeFirma = DateTime.Today.ToString("yyyy-MM-dd");
+            RetrieveKey rkey = new RetrieveKey();
+            Console.WriteLine(rkey.TraeClaveSelloDigital(FechaDeFirma));
+            Console.WriteLine(">" + rkey.TraeClaveSelloDigital(new DateTime(2010, 1, 3).ToString("yyyy-MM-dd")) + "<");
+            Console.WriteLine(">" + rkey.TraeClaveSelloDigital(new DateTime(2010, 1, 4).ToString("yyyy-MM-dd")) + "<");
+            Console.WriteLine(">" + rkey.TraeClaveSelloDigital(new DateTime(2010, 1, 5).ToString("yyyy-MM-dd")) + "<");
+
+            Console.WriteLine("----------------_________________----------------");
+
+
             string jsonData = @"{'FirstName': 'Jignesh', 'LastName': 'Trivedi'}";
 
             // Convert BlogSites object to JOSN string format 
